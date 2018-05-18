@@ -1,0 +1,19 @@
+# TEAM NAME:
+EliteHax0rs
+
+# VISUALISER ENABLED:
+1
+
+# WRITE BOT STDERR TO FILE:
+1
+
+# SERVER ADDRESS:
+zeeslag.thalia.nu:42042
+#localhost:42042
+
+# BOT RUNNING COMMAND:
+./../bots/niekBot.py
+
+# Example commands:
+# ./starterbot.py
+# java -jar ./starterbot.jar
