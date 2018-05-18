@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import time
 from random import randint
 from sys import stderr
 
@@ -24,14 +23,15 @@ class NiekBot(BotLib):
         return x, y
 
     # Random
-    def choose_ship_location(self):
+    def choose_ship_location(self, size=None):
+        if size is None:
+            size = self.choose_ship_size()
         x = randint(0, 9)
         y = randint(0, 9)
         direction = randint(0, 3)
-        size = self.choose_ship_size()
         print(size, file=stderr)
         if self.checkRangeFree((x, y), direction) < size:
-            return self.choose_ship_location()
+            return self.choose_ship_location(size)
         thing = ((x, y), \
                  (x + Direction.offsets[direction][0] * (size - 1),
                   y + Direction.offsets[direction][1] * (size - 1)))
@@ -58,7 +58,7 @@ class NiekBot(BotLib):
 
 
 if __name__ == "__main__":
-    try:
-        NiekBot().run()
-    except:
-        time.sleep(100)
+    # try:
+    NiekBot().run()
+# except:
+# time.sleep(100)
