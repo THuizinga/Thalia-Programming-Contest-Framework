@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 
 import socket as s
-from Game import GameRunner
+from framework.Game import GameRunner
 from threading import Thread, Lock
 from threading import enumerate
 from enum import IntEnum
 from time import sleep
-from Visualiser import Visualiser
+from framework.Visualiser import Visualiser
 from argparse import ArgumentParser
 
 

@@ -5,7 +5,7 @@ import sys
 import re
 from enum import Enum,IntEnum
 import random, time
-from Game import Board, Ship, Tile
+from exampleBot.Game import Board, Ship, Tile
 
 class ShipSizes(IntEnum):
     Destroyer  = 2

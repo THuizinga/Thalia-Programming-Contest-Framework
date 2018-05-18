@@ -5,7 +5,7 @@ from threading import Thread
 import random
 import time
 
-from Visualiser import Visualiser
+from framework.Visualiser import Visualiser
 
 RECVCONST = 4096
 TURNTIMEOUT      = 2.0
