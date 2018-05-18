@@ -7,15 +7,15 @@ random = Random()
 
 class Direction:
     East = 0
-    West = 1
-    North = 2
-    South = 3
+    South = 1
+    West = 2
+    North = 3
 
     offsets = [
-        (0, 1),
-        (0, -1),
         (1, 0),
-        (-1, 0)
+        (0, -1),
+        (-1, 0),
+        (0, 1)
     ]
 
 
