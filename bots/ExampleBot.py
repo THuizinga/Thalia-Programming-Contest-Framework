@@ -16,7 +16,7 @@ class ExampleBot(Bot):
 
         shipSize = self.choose_ship_size() - 1
         # Choose the ship's left position
-        x1 = 1
+        x1 = 2
         y1 = -1
         for y in range(self.ownBoard.dims[1]):
             if self.ownBoard.get((x1, y)).free:
