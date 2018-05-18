@@ -1,27 +1,10 @@
 #!/usr/bin/python3
 
-from random import Random
-
 from bots.Bot import *
-
-random = Random()
-
-
-class Direction:
-    East = 0
-    West = 1
-    North = 2
-    South = 3
-
-    offsets = [
-        (0, 1),
-        (0, -1),
-        (1, 0),
-        (-1, 0)
-    ]
+from bots.BotLib import BotLib, Direction, random
 
 
-class ExampleBot(Bot):
+class niekBot(BotLib):
     def __init__(self):
         super().__init__()
         self.placementIndex = 0
