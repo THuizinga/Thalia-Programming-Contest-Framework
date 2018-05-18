@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from exampleBot.Bot import *
+from bots.Bot import *
 
 
 class ExampleBot(Bot):
