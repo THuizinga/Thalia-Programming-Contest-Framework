@@ -1,53 +1,40 @@
 #!/usr/bin/python3
 
 from bots.Bot import *
+from bots.BotLib import *
 
 
-class ExampleBot(Bot):
+class ExampleBot(BotLib):
     def __init__(self):
         super().__init__()
         self.placementIndex = 0
         # placementIndex is used to choose an island and shot location. You may remove it if you do not use it.
 
     def choose_ship_location(self):
-        # This example function only places all ships horizontally,
-        # each above the other, starting in the bottom left corner.
-        # You should write a better method.
+        # This method places the ships in a spiral starting from outside to the inside.
 
         shipSize = self.choose_ship_size() - 1
         # Choose the ship's left position
-        x1 = 1
-        y1 = -1
-        for y in range(self.ownBoard.dims[1]):
-            if self.ownBoard.get((x1, y)).free:
-                y1 = y
-        if y1 == -1:
-            raise Exception("Could not place ship along left border.")
-        x2 = x1 + shipSize
-        y2 = y1
-        return ((x1, y1), (x2, y2))
+        x1,x2,y1,y2= 0
+        dir = 0
+        while shipSize > 0:
+            if self.checkRangeFree((x1,y1),dir) > shipSize:
+                x2 = x1 + Direction.offsets[dir][0]*shipSize
+                y2 = y1 + Direction.offsets[dir][1]*shipSize
+                return ((x1,y1),(x2,y2))
+            elif dir == 0 and x1 < 9:
+                    x1 += 1
+            elif dir == 1 and y1 < 9:
+                    y1 -= 1
+            elif dir == 2 and x1 < 9:
+                    x1 -= 1
+            elif dir == 3 and x1 < 9:
+                    y1 += 1
+            else:
+                dir = (dir + 1) % 4
 
-    def checkFree(self, coord, direction):
-        result = 0
-        x = coord[0]
-        y = coord[1]
-        if direction == 'E':
-            while self.ownBoard.get(x, y).free:
-                x += 1
-                result += 1
-        elif direction == 'S':
-            while self.ownBoard.get(x, y).free:
-                y += 1
-                result += 1
-        elif direction == 'W':
-            while self.ownBoard.get(x, y).free:
-                x -= 1
-                result += 1
-        elif direction == 'N':
-            while self.ownBoard.get(x, y).free:
-                y -= 1
-                result += 1
-        return result
+
+
 
     def choose_island_location(self):
         # This is a dummy method, you should write a better one.
