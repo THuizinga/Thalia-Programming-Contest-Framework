@@ -120,6 +120,7 @@ def becomeLink(viz):
             if DEBUG:
                 print(data)
             else:
+                print(data)
                 print(data, file=proc.stdin, flush=True)
             updateViz(viz, data)  # (Voor UPDATE command)
 
@@ -130,7 +131,7 @@ def becomeLink(viz):
             if flow >= 2:
                 # BOT -> SERVER
                 bot_resp = input() if DEBUG else proc.stdout.readline().rstrip("\n")
-                # print(bot_resp)
+                print(bot_resp)
                 sayToServer(bot_resp)
                 updateViz(viz, data, response=bot_resp)  # (Voor PLACE command)
 
@@ -142,6 +143,7 @@ def becomeLink(viz):
                 if DEBUG:
                     print(data_result)
                 else:
+                    print(data_result)
                     print(data_result, file=proc.stdin, flush=True)
                 updateViz(viz, data, response=bot_resp, result=data_result)  # (Voor SHOOT -> RESULT command)
 

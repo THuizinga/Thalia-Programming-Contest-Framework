@@ -23,9 +23,6 @@ class BotLib(Bot):
         oy = Direction.offsets[direction][1]
 
         for i in range(11):
-            if x + ox * i < 0 or x + ox * i > 9 or \
-                    y + oy * i < 0 or x + oy * i > 9:
-                return i
             if not self.checkFree((x + ox * i, y + oy * i), self.ownBoard):
                 return i
 
