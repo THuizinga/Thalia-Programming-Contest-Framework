@@ -1,8 +1,4 @@
-from _random import Random
-
 from bots.Bot import Bot
-
-random = Random()
 
 
 class Direction:
@@ -20,18 +16,22 @@ class Direction:
 
 
 class BotLib(Bot):
-    def checkFree(self, coord, direction):
-        result = 0
+    def checkRangeFree(self, coord, direction):
         x = coord[0]
         y = coord[1]
         ox = Direction.offsets[direction][0]
         oy = Direction.offsets[direction][1]
 
-        for i in range(10):
+        for i in range(11):
             if x + ox * i < 0 or x + ox * i > 9 or \
                     y + oy * i < 0 or x + oy * i > 9:
-                return result
-            if self.ownBoard.get((x + ox * i, y + oy * i)).free:
-                result += 1
-            else:
-                return result
+                return i
+            if not self.checkFree((x + ox * i, y + oy * i), self.ownBoard):
+                return i
+
+    def checkFree(self, coord, board, canBeOut=False):
+        x = coord[0]
+        y = coord[1]
+        if x < 0 or x > 9 or y < 0 or y > 9:
+            return canBeOut
+        return board.get((x, y)).free

@@ -1,10 +1,10 @@
 #!/usr/bin/python3
+from random import randint
 
-from bots.Bot import *
-from bots.BotLib import BotLib, Direction, random
+from bots.BotLib import BotLib, Direction
 
 
-class niekBot(BotLib):
+class NiekBot(BotLib):
     def __init__(self):
         super().__init__()
         self.placementIndex = 0
@@ -12,26 +12,26 @@ class niekBot(BotLib):
 
     # random, not along borders and euclidean distance of at least 4
     def choose_island_location(self):
-        x = random.randint(1, 8)
-        y = random.randint(1, 8)
+        x = randint(1, 8)
+        y = randint(1, 8)
         for ix in range(-3, 4):
             for iy in range(-3 + abs(ix), 4 - abs(ix)):
-                if self.enemyBoard.get((ix, iy)) != Tile.water:
+                if not self.checkFree((x + ix, y + iy), self.enemyBoard, True):
                     return self.choose_island_location()
 
         return x, y
 
     # Random
     def choose_ship_location(self):
-        x = random.randint(0, 9)
-        y = random.randint(0, 9)
-        direction = random.randint(0, 3)
+        x = randint(0, 9)
+        y = randint(0, 9)
+        direction = randint(0, 3)
         size = self.choose_ship_size()
-        if self.checkFree((x, y), direction) < size:
+        if self.checkRangeFree((x, y), direction) < size:
             return self.choose_ship_location()
         return (x, y), \
-               (x + Direction.offsets[direction] * (size - 1),
-                y + Direction.offsets[direction] * (size - 1))
+               (x + Direction.offsets[direction][0] * (size - 1),
+                y + Direction.offsets[direction][1] * (size - 1))
 
     # Chance field
     def choose_shot_location(self):
@@ -51,7 +51,7 @@ class niekBot(BotLib):
         super().handle_update(text)
         # You may want to extend this method, but it is not required.
 
-    def checkFree(self, coord, direction):
+    def checkRangeFree(self, coord, direction):
         result = 0
         x = coord[0]
         y = coord[1]
@@ -69,4 +69,4 @@ class niekBot(BotLib):
 
 
 if __name__ == "__main__":
-    ExampleBot().run()
+    NiekBot().run()

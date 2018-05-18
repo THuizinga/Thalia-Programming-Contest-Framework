@@ -4,6 +4,7 @@ import os
 import signal
 import socket
 import time
+from argparse import ArgumentParser
 from subprocess import DEVNULL, PIPE, Popen
 
 # refactor:
@@ -295,7 +296,12 @@ import random
 
 
 def readConfig():
-    with open("./config", "r") as conf:
+    parser = ArgumentParser(description="Programming contest framework")
+    parser.add_argument('config_file')
+    args = parser.parse_args()
+    print(args)
+
+    with open(args.config_file, "r") as conf:
         s = conf.read().split("\n")
         s = list(filter(lambda x: not (x.isspace() or x == ""), s))
         s = [x.strip() for x in s]
